@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>圖片瀏覽</title>
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<style type="text/css">
+	html, body
+	{
+		height: 100%;
+	}
+	div img {
+		max-height:600px;
+		height:600px;
+		height:expression(document.body.clientheight>600?\"600px\":\"auto");
+		overflow:hidden;
+	}
+	</style>
+	<script type="text/javascript">
+		/*
+		*全域變數
+		*/
+		var thenum;
+		//圖片陣列
+		var ImgArr;
+		//取得圖片Img
+		var IP;
+		//圖片顯示狀態
+		var ImgStatus;
+		/**********/
+
+		//初始
+		function Init() {
+			thenum = 0;
+			ImgArr = new Array("8Eq4nSN.png" , "By2WDzX.jpg" , "jm04DYM.jpg" , "N16SAXw.jpg" , "p6ztKtL.jpg" , "zzrCmGX.png");
+			IP = document.getElementById("ImagePicture");
+			IP.src=ImgArr[0];
+			ImgStatus=true;
+			//test();
+		}
+		//變換圖片
+		function ChangeImg(type) {
+			//上一張
+			if(type==0) {
+				thenum-=1;
+				if(thenum<0)
+					thenum=0;
+				IP.src=ImgArr[thenum];
+				console.log("第"+(thenum+1)+"個");
+			} else if(type==1) { //下一張
+				thenum+=1;
+				if(thenum==ImgArr.length){
+					thenum=ImgArr.length-1;
+				}
+				IP.src=ImgArr[thenum];
+				console.log("第"+(thenum+1)+"個");
+			}
+		}
+		/*
+		//JQuery特效
+		function test(){	
+			$('#ImagePicture').click(function() {
+				if(ImgStatus){
+					$('#ImagePicture').fadeOut("slow");
+					ImgStatus=false;
+				} else {
+					$('#ImagePicture').fadeIn("slow");
+					ImgStatus=true;
+				}
+			});
+		}
+		*/
+	</script>
+</head>
+<body onload="Init();">
+<div style="float:left;">
+	<input type="button" value="上一張" onclick="ChangeImg(0);"/>
+	<input type="button" value="下一張" onclick="ChangeImg(1);"/>
+</div>
+<div style="float:left;">
+	<img id="ImagePicture" />
+</div>
+</body>
+</html>
